@@ -31,6 +31,14 @@ android {
 
         vectorDrawables.useSupportLibrary = true
 
+        // Per-brand baking from @luxwallet/brand (BRAND=lux|hanzo|zoo): the
+        // release workflow passes -PluxwalletGatewayRpcBaseUrl / -PluxwalletBrandName /
+        // -PluxwalletDefaultEvmChainId resolved by emit-brand. Unset = the Lux default,
+        // so local `./gradlew assembleRelease` is unchanged.
+        val brandName = (project.findProperty("luxwalletBrandName") as String?) ?: "Lux Wallet"
+        val brandGateway = (project.findProperty("luxwalletGatewayRpcBaseUrl") as String?) ?: "https://api.lux.network"
+        val brandDefaultEvmChainId = (project.findProperty("luxwalletDefaultEvmChainId") as String?) ?: "96369"
+
         resValue("string", "companyWebPageLink", "https://lux.network")
         resValue("string", "appWebPageLink", "https://lux.network/wallet")
         resValue("string", "analyticsLink", "https://lux.network/wallet/analytics")
@@ -39,13 +47,14 @@ android {
         resValue("string", "appTelegramLink", "https://t.me/luxdefi")
         resValue("string", "reportEmail", "support@lux.network")
         resValue("string", "releaseNotesUrl", "https://api.github.com/repos/luxwallet/unstoppable-wallet-android/releases/tags/")
-        resValue("string", "walletConnectAppMetaDataName", "Lux Wallet")
+        resValue("string", "walletConnectAppMetaDataName", brandName)
         resValue("string", "walletConnectAppMetaDataUrl", "lux.network")
         resValue("string", "walletConnectAppMetaDataIcon", "https://lux.network/logo.png")
         resValue("string", "accountsBackupFileSalt", "unstoppable")
 
         buildConfigField("boolean", "FDROID_BUILD", "false")
-        buildConfigField("String", "GATEWAY_RPC_BASE_URL", "\"https://api.lux.network\"")
+        buildConfigField("String", "GATEWAY_RPC_BASE_URL", "\"$brandGateway\"")
+        buildConfigField("int", "DEFAULT_EVM_CHAIN_ID", brandDefaultEvmChainId)
 
         ndk {
             abiFilters += listOf("armeabi-v7a", "arm64-v8a")
