@@ -196,6 +196,7 @@ class AdapterFactory(
                 )
             }
 
+            // XRP: pending ripple-kit -> BlockchainType.Ripple -> RippleAdapter(rippleKitManager.getRippleKitWrapper(wallet.account))
             else -> null
         }
         is TokenType.Eip20 -> {

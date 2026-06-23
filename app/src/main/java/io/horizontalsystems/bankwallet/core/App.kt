@@ -329,6 +329,7 @@ class App : CoreApp(), WorkConfiguration.Provider, ImageLoaderFactory {
         tronKitManager = TronKitManager(evmSyncSourceManager, backgroundManager)
         tonKitManager = TonKitManager(backgroundManager)
         stellarKitManager = StellarKitManager(backgroundManager)
+        // XRP: pending ripple-kit -> rippleKitManager = RippleKitManager(backgroundManager); rippleAccountManager.start()
 
         wordsManager = WordsManager(Mnemonic())
         networkManager = NetworkManager()
