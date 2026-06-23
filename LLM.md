@@ -51,11 +51,20 @@ Logo / app label: per-brand `mipmap` launcher icons + `App_Name` string for
 hanzo/zoo are the remaining asset wiring (lux ships today). Non-lux
 `applicationId`s need their own Play app records before `upload-play`.
 
+## Legacy fork-CI purge (arcd-only)
+
+The Unstoppable-fork CI used forbidden GitHub-hosted runners and is fully
+superseded by `release.yml`. DELETED: `build_apk.yml` (duplicated the tag
+build+GitHub-Release publish), `deploy_dev.yml` + `deploy_release.yml`
+(Firebase distribution to the upstream's `horsysteam` group + hardcoded
+upstream Firebase appIds), `notify_telegram.yml` + `translate.yml` (telegram /
+crowdin fork noise). None retargeted — all were upstream-only plumbing.
+
 ## Rules
 
 1. Update THIS file; never create scratch summary files.
-2. arcd pools only — never `ubuntu-*` (the legacy `deploy_release.yml` uses
-   `ubuntu-24.04`; it is superseded by `release.yml`).
+2. arcd pools only — never `ubuntu-*` (the legacy fork workflows that used
+   `ubuntu-*` were purged; `release.yml` is the one build+sign path).
 3. Signing via `hanzoai/ci-signing`; never put a keystore/secret in the repo
    (the `test.keystore` is for CI test flavors only — never for `release`).
 4. Brand selection via `@luxwallet/brand` only.
