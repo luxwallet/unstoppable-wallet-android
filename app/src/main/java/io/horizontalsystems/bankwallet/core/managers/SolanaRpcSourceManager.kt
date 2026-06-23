@@ -19,6 +19,7 @@ class SolanaRpcSourceManager(
     val rpcSourceUpdateObservable: Observable<Unit>
         get() = rpcSourceSubjectUpdate
 
+    // Solana RPC stays on Alchemy; gateway routing deferred until solana-kit RpcSource custom-URL variant is verified (needs build/CI).
     val allRpcSources = listOf(RpcSource.Alchemy(App.appConfigProvider.solanaAlchemyApiKey))
 
     val rpcSource: RpcSource

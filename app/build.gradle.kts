@@ -45,6 +45,7 @@ android {
         resValue("string", "accountsBackupFileSalt", "unstoppable")
 
         buildConfigField("boolean", "FDROID_BUILD", "false")
+        buildConfigField("String", "GATEWAY_RPC_BASE_URL", "\"https://api.lux.network\"")
 
         ndk {
             abiFilters += listOf("armeabi-v7a", "arm64-v8a")

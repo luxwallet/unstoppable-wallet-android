@@ -50,7 +50,7 @@ class EvmSyncSourceManager(
 
     fun defaultSyncSources(blockchainType: BlockchainType): List<EvmSyncSource> {
         return when (blockchainType) {
-            BlockchainType.Ethereum -> listOf(
+            BlockchainType.Ethereum -> gatewaySyncSource(blockchainType)?.let { listOf(it) }.orEmpty() + listOf(
                 evmSyncSource(
                     blockchainType,
                     "BlocksDecoded",
@@ -65,7 +65,7 @@ class EvmSyncSourceManager(
                 )
             )
 
-            BlockchainType.BinanceSmartChain -> listOf(
+            BlockchainType.BinanceSmartChain -> gatewaySyncSource(blockchainType)?.let { listOf(it) }.orEmpty() + listOf(
                 evmSyncSource(
                     blockchainType,
                     "Binance",
@@ -98,7 +98,7 @@ class EvmSyncSourceManager(
                 )
             )
 
-            BlockchainType.Polygon -> listOf(
+            BlockchainType.Polygon -> gatewaySyncSource(blockchainType)?.let { listOf(it) }.orEmpty() + listOf(
                 evmSyncSource(
                     blockchainType,
                     "Polygon RPC",
@@ -113,7 +113,7 @@ class EvmSyncSourceManager(
                 )
             )
 
-            BlockchainType.Avalanche -> listOf(
+            BlockchainType.Avalanche -> gatewaySyncSource(blockchainType)?.let { listOf(it) }.orEmpty() + listOf(
                 evmSyncSource(
                     blockchainType,
                     "Avax Network",
@@ -128,7 +128,7 @@ class EvmSyncSourceManager(
                 )
             )
 
-            BlockchainType.Optimism -> listOf(
+            BlockchainType.Optimism -> gatewaySyncSource(blockchainType)?.let { listOf(it) }.orEmpty() + listOf(
                 evmSyncSource(
                     blockchainType,
                     "Optimism",
@@ -146,7 +146,7 @@ class EvmSyncSourceManager(
                 )
             )
 
-            BlockchainType.Base -> listOf(
+            BlockchainType.Base -> gatewaySyncSource(blockchainType)?.let { listOf(it) }.orEmpty() + listOf(
                 evmSyncSource(
                     blockchainType,
                     "PublicNode",
@@ -167,7 +167,7 @@ class EvmSyncSourceManager(
                 ),
             )
 
-            BlockchainType.ZkSync -> listOf(
+            BlockchainType.ZkSync -> gatewaySyncSource(blockchainType)?.let { listOf(it) }.orEmpty() + listOf(
                 evmSyncSource(
                     blockchainType,
                     "ZKsync",
@@ -176,7 +176,7 @@ class EvmSyncSourceManager(
                 )
             )
 
-            BlockchainType.ArbitrumOne -> listOf(
+            BlockchainType.ArbitrumOne -> gatewaySyncSource(blockchainType)?.let { listOf(it) }.orEmpty() + listOf(
                 evmSyncSource(
                     blockchainType,
                     "Arbitrum",
@@ -191,7 +191,7 @@ class EvmSyncSourceManager(
                 )
             )
 
-            BlockchainType.Gnosis -> listOf(
+            BlockchainType.Gnosis -> gatewaySyncSource(blockchainType)?.let { listOf(it) }.orEmpty() + listOf(
                 evmSyncSource(
                     blockchainType,
                     "Gnosis Chain",
@@ -206,7 +206,7 @@ class EvmSyncSourceManager(
                 )
             )
 
-            BlockchainType.Fantom -> listOf(
+            BlockchainType.Fantom -> gatewaySyncSource(blockchainType)?.let { listOf(it) }.orEmpty() + listOf(
                 evmSyncSource(
                     blockchainType,
                     "Fantom Chain",
@@ -271,6 +271,16 @@ class EvmSyncSourceManager(
             emptyList()
         }
     }
+
+    private fun gatewaySyncSource(blockchainType: BlockchainType): EvmSyncSource? =
+        appConfigProvider.gatewayRpcUrl(blockchainType)?.let { url ->
+            evmSyncSource(
+                blockchainType,
+                "Lux Gateway",
+                RpcSource.Http(listOf(URI(url)), null),
+                defaultTransactionSource(blockchainType)
+            )
+        }
 
     private fun evmSyncSource(
         blockchainType: BlockchainType,

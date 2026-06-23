@@ -36,6 +36,27 @@ class AppConfigProvider(localStorage: ILocalStorage) {
     val blocksDecodedEthereumRpc by lazy {
         Translator.getString(R.string.blocksDecodedEthereumRpc)
     }
+
+    val gatewayRpcBaseUrl: String = BuildConfig.GATEWAY_RPC_BASE_URL.trimEnd('/')
+
+    // Routes EVM RPC through the Lux gateway: https://<gateway>/v1/rpc/<chainId>.
+    // Returns null for chains without a gateway route so callers keep their existing fallback.
+    fun gatewayRpcUrl(blockchainType: BlockchainType): String? {
+        val chainId = when (blockchainType) {
+            BlockchainType.Ethereum -> 1
+            BlockchainType.BinanceSmartChain -> 56
+            BlockchainType.Polygon -> 137
+            BlockchainType.Avalanche -> 43114
+            BlockchainType.Optimism -> 10
+            BlockchainType.Base -> 8453
+            BlockchainType.ZkSync -> 324
+            BlockchainType.ArbitrumOne -> 42161
+            BlockchainType.Gnosis -> 100
+            BlockchainType.Fantom -> 250
+            else -> return null
+        }
+        return "$gatewayRpcBaseUrl/v1/rpc/$chainId"
+    }
     val twitterBearerToken by lazy {
         Translator.getString(R.string.twitterBearerToken)
     }
