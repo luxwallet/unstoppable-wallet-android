@@ -54,6 +54,13 @@
             android:name=".modules.keystore.KeyStoreActivity"
             android:screenOrientation="portrait" />
 
+        <!-- Brownfield host for the shared @hanzo/gui login (@luxwallet/mobile-rn). -->
+        <activity
+            android:name=".rn.LoginRNActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|uiMode"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+            android:windowSoftInputMode="adjustResize" />
+
         <activity
             android:name=".modules.main.MainActivity"
             android:exported="true"

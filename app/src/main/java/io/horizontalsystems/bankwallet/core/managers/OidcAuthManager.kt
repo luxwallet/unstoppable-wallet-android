@@ -113,6 +113,15 @@ class OidcAuthManager(
         }
     }
 
+    /**
+     * Persist a session produced outside the PKCE web flow — e.g. a Web3 / SIWx
+     * login completed in the @hanzo/gui RN screen and handed back over the
+     * LuxSession bridge. Same encrypted store as the OIDC path; one way in.
+     */
+    fun setSession(session: OidcSession) {
+        persist(session)
+    }
+
     fun accessToken(): String? =
         currentSession()?.takeIf { it.expiresAt > nowSeconds() }?.accessToken
 

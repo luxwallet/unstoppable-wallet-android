@@ -245,6 +245,11 @@ class App : CoreApp(), WorkConfiguration.Provider, ImageLoaderFactory {
     override fun onCreate() {
         super.onCreate()
 
+        // Brownfield React Native host for additive @hanzo/gui screens
+        // (@luxwallet/mobile-rn). Composition, not inheritance — native screens
+        // are untouched; LoginRNActivity mounts the shared "LuxLogin" bundle.
+        io.horizontalsystems.bankwallet.rn.LuxReactHost.init(this)
+
         if (!BuildConfig.DEBUG) {
             //Disable logging for lower levels in Release build
             Logger.getLogger("").level = Level.SEVERE
