@@ -1,5 +1,5 @@
 <resources>
-    <string name="App_Name" translatable="false">Unstoppable</string>
+    <string name="App_Name" translatable="false">Lux Wallet</string>
     <string name="DeeplinkScheme" translatable="false">unstoppable</string>
 
     <!--Common-->
@@ -73,7 +73,7 @@
     <string name="SyncError">Sync error. Try Again</string>
     <string name="Search_NotFounded">Not Founded</string>
 
-    <string name="FooterText" translatable="false">© Horizontal Systems %d</string>
+    <string name="FooterText" translatable="false">© Lux Industries %d</string>
 
     <string name="Keyboard">Keyboard</string>
 

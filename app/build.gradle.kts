@@ -20,7 +20,7 @@ android {
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "io.horizontalsystems.bankwallet"
+        applicationId = "network.lux.wallet"
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.compileSdk.get().toInt()
         versionCode = 170
@@ -31,17 +31,17 @@ android {
 
         vectorDrawables.useSupportLibrary = true
 
-        resValue("string", "companyWebPageLink", "https://horizontalsystems.io")
-        resValue("string", "appWebPageLink", "https://unstoppable.money")
-        resValue("string", "analyticsLink", "https://unstoppable.money/analytics")
-        resValue("string", "appGithubLink", "https://github.com/horizontalsystems/unstoppable-wallet-android")
-        resValue("string", "appTwitterLink", "https://twitter.com/UnstoppableByHS")
-        resValue("string", "appTelegramLink", "https://t.me/unstoppable_announcements")
-        resValue("string", "reportEmail", "support.unstoppable@protonmail.com")
-        resValue("string", "releaseNotesUrl", "https://api.github.com/repos/horizontalsystems/unstoppable-wallet-android/releases/tags/")
-        resValue("string", "walletConnectAppMetaDataName", "Unstoppable")
-        resValue("string", "walletConnectAppMetaDataUrl", "unstoppable.money")
-        resValue("string", "walletConnectAppMetaDataIcon", "https://raw.githubusercontent.com/horizontalsystems/HS-Design/master/PressKit/UW-AppIcon-on-light.png")
+        resValue("string", "companyWebPageLink", "https://lux.network")
+        resValue("string", "appWebPageLink", "https://lux.network/wallet")
+        resValue("string", "analyticsLink", "https://lux.network/wallet/analytics")
+        resValue("string", "appGithubLink", "https://github.com/luxwallet/unstoppable-wallet-android")
+        resValue("string", "appTwitterLink", "https://twitter.com/luxdefi")
+        resValue("string", "appTelegramLink", "https://t.me/luxdefi")
+        resValue("string", "reportEmail", "support@lux.network")
+        resValue("string", "releaseNotesUrl", "https://api.github.com/repos/luxwallet/unstoppable-wallet-android/releases/tags/")
+        resValue("string", "walletConnectAppMetaDataName", "Lux Wallet")
+        resValue("string", "walletConnectAppMetaDataUrl", "lux.network")
+        resValue("string", "walletConnectAppMetaDataIcon", "https://lux.network/logo.png")
         resValue("string", "accountsBackupFileSalt", "unstoppable")
 
         buildConfigField("boolean", "FDROID_BUILD", "false")
