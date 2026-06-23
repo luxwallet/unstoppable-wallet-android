@@ -94,6 +94,18 @@
 
                 <data android:scheme="wc" />
             </intent-filter>
+            <!-- IAM (hanzo.id) OIDC redirect -->
+            <intent-filter android:label="@string/App_Name">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:scheme="luxwallet"
+                    android:host="oidc"
+                    android:path="/callback" />
+            </intent-filter>
             <intent-filter android:label="@string/App_Name">
                 <action android:name="android.intent.action.VIEW" />
 

@@ -49,6 +49,7 @@ import io.horizontalsystems.bankwallet.core.managers.NftAdapterManager
 import io.horizontalsystems.bankwallet.core.managers.NftMetadataManager
 import io.horizontalsystems.bankwallet.core.managers.NftMetadataSyncer
 import io.horizontalsystems.bankwallet.core.managers.NumberFormatter
+import io.horizontalsystems.bankwallet.core.managers.OidcAuthManager
 import io.horizontalsystems.bankwallet.core.managers.PaidActionSettingsManager
 import io.horizontalsystems.bankwallet.core.managers.PasskeyManager
 import io.horizontalsystems.bankwallet.core.managers.PriceManager
@@ -172,6 +173,7 @@ class App : CoreApp(), WorkConfiguration.Provider, ImageLoaderFactory {
         lateinit var walletStorage: IWalletStorage
         lateinit var accountManager: IAccountManager
         lateinit var userManager: UserManager
+        lateinit var oidcAuthManager: OidcAuthManager
         lateinit var accountFactory: IAccountFactory
         lateinit var backupManager: IBackupManager
         lateinit var proFeatureAuthorizationManager: ProFeaturesAuthorizationManager
@@ -344,6 +346,9 @@ class App : CoreApp(), WorkConfiguration.Provider, ImageLoaderFactory {
         }
 
         encryptionManager = EncryptionManager(keyProvider)
+
+        // IAM (hanzo.id) OIDC — layered over AccountManager; sign-in is user-initiated via oidcAuthManager.signIn(...).
+        oidcAuthManager = OidcAuthManager(applicationContext, preferences, encryptionManager)
 
         walletActivator = WalletActivator(walletManager, marketKit)
         passkeyManager = PasskeyManager()
